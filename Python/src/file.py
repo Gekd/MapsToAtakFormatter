@@ -52,7 +52,7 @@ def get_data(url, path) -> None:
 
 
 
-def extract(path) -> None:
+def extract(path, extracted_file) -> None:
     """Unzip the downloaded file.
 
     Keyword arguments:
@@ -65,7 +65,7 @@ def extract(path) -> None:
 
     # Extract the file
     with ZipFile(path) as file:
-        file.extractall("content")
+        file.extractall(extracted_file)
 
 
 def compress(path, path_out) -> None:
@@ -102,5 +102,3 @@ def delete(path) -> None:
         os.remove(path)
     else:
         shutil.rmtree(path)
-
-
