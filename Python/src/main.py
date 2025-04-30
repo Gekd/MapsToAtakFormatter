@@ -1,6 +1,6 @@
-from dotenv import load_dotenv
 import os
-from file import get_data, extract, delete
+from dotenv import load_dotenv
+from file import get_data, extract, delete, compress
 import data
 import image
 
@@ -51,7 +51,6 @@ def main():
 
         os.makedirs(img_dir_path, exist_ok=True)
 
-        
         img_count = parser.data_count[dir_name]
         color = dir_name.split("-")[1]
 
@@ -59,9 +58,10 @@ def main():
             img_name = dir_name + "-" + str(i+1).zfill(5)
             img.draw(i+1, img_name, color, img_dir_path)
 
-
-
-
+        # Compress the generated files
+        compress(dir_path, os.path.join(path_out, dir_name + ".kmz"))
+        # Delete the uncompressed files
+        delete(dir_path)
 
 
 
