@@ -5,12 +5,26 @@ import data
 import image
 
 def main():
+    """
+    Main function to execute the KML data processing workflow.
+    This function has following steps:
+    1. Load variables from a .env file.
+    2. Retrieve the data from URL in KMZ format.
+    3. Set up the directory structure.
+    5. Extract the KML file from the KMZ archive.
+    6. Parse the KML file to extract relevant data.
+    7. Generate images based on the parsed data.
+    8. Compress the output files into KMZ format.
+    9. Clean up temporary files and directories.
+    """
+
     # Load environment variables from .env file
     load_dotenv()
     # Get the environment variables
     url = os.getenv("URL")
-    font_url = "https://raw.githubusercontent.com/tsenart/sight/master/fonts/Consolas.ttf"
 
+    # Use monospace font
+    font_url = "https://raw.githubusercontent.com/tsenart/sight/master/fonts/Consolas.ttf"
 
     current_file = os.path.abspath(__file__)
     root_dir = os.path.dirname(os.path.dirname(current_file))
@@ -31,6 +45,7 @@ def main():
 
     # Delete the KMZ file after extraction
     delete(path_kmz)
+
     data_images_path = os.path.join(path_data, "images")
     # Delete the KML images for data correction
     delete(data_images_path)
@@ -62,8 +77,6 @@ def main():
         compress(dir_path, os.path.join(path_out, dir_name + ".kmz"))
         # Delete the uncompressed files
         delete(dir_path)
-
-
 
 if __name__ == '__main__':
     main()
