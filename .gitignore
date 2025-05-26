@@ -1,5 +1,5 @@
 .env
 Formatter
 __pycache__
-output
+output/*
 *.pyc

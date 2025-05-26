@@ -1,8 +1,6 @@
 import os
 from dotenv import load_dotenv
-from file import get_data, extract, delete, compress
-import data
-import image
+from src import KMLParser, get_data, extract, delete, compress, ImageCreation
 
 def main():
     """
@@ -27,14 +25,14 @@ def main():
     font_url = "https://raw.githubusercontent.com/tsenart/sight/master/fonts/Consolas.ttf"
 
     current_file = os.path.abspath(__file__)
-    root_dir = os.path.dirname(os.path.dirname(current_file))
+    root_dir = os.path.dirname(current_file)
     path_out = os.path.join(root_dir, "output")
 
     os.makedirs(path_out, exist_ok=True)
     path_kmz = os.path.join(path_out, "data.kmz")
 
     # Initialize the KMLParser
-    parser = data.KMLParser()
+    parser = KMLParser()
 
     path_data = os.path.join(path_out, "data")
 
@@ -58,7 +56,7 @@ def main():
     delete(path_data)
 
     # Generate new images
-    img = image.ImageCreation(32, font_url, 26)
+    img = ImageCreation(32, font_url, 26)
 
     for dir_name in os.listdir(path_out):
         dir_path = os.path.join(path_out, dir_name)

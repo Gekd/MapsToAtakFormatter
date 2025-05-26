@@ -43,7 +43,7 @@ def get_data(url, path) -> None:
 
     # Check if the response content is empty
     if not response.content:
-        raise Exception("No content found in the response")
+        raise ValueError("No content found in the response")
 
     # Save the response content to a file
     with open(path, "wb") as file:
@@ -78,7 +78,8 @@ def compress(path, path_out) -> None:
 
     # Check if the directory exists
     if not os.path.exists(path):
-        raise FileNotFoundError(f"The directory {path} does not exist")
+        os.makedirs(path_out, exist_ok=True)
+
 
     # Create a zip file
     with ZipFile(path_out, 'w', compression=ZIP_DEFLATED) as new_file:
@@ -87,7 +88,7 @@ def compress(path, path_out) -> None:
                 file_path = os.path.join(root, file)
 
                 # Use arcname to maintain the directory structure inside the KMZ
-                arcname = os.path.relpath(file_path, path_out)
+                arcname = os.path.relpath(file_path, path)
                 new_file.write(file_path, arcname=arcname)
 
 
