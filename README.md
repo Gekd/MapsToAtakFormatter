@@ -9,7 +9,7 @@
 5. Create a ```.env``` file and add the link from Googe My Maps as ```URL="YOUR_GOOGLE_MY_MAPS_LINK"```
 6. Run the Docker build command ```docker build -t formatter .```
 7. Run the Docker run command ```docker run --rm -v $(pwd):/src/output formatter```
-8. Copy the .kmz files from ```òutput``` directory into your device ```atak/overlays``` directory
+8. Copy the .kmz files from ```output``` directory into your device ```atak/overlays``` directory
 9. Import the files inside the ```Atak```
 ![1748284025637](https://github.com/user-attachments/assets/d4c8ab8c-c6f5-46ac-99aa-7fb14965f75d)
 Select ```Local SD``` and import the files inside of ```atak/overlays``` directory
